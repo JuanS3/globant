@@ -15,7 +15,7 @@ with hired_by_qtr as (
         inner join employees e on e.department_id = d.id
         inner join jobs j on j.id = e.job_id
     where
-        extract('quarter' from e.hire_datetime) = 2021
+        extract('year' from e.hire_datetime) = 2021
     group by
         d.department,
         j.job,
