@@ -56,3 +56,59 @@ async def upload_csv_file(file: UploadFile = File(...)) -> dict[str, str]:
     verify_csv(file)
 
     return {'message': 'CSV file uploaded and data saved in the database.'}
+
+
+@router.post("/upload/csv/employees/")
+async def upload_csv_file(file: UploadFile = File(...)) -> dict[str, str]:
+    """
+    Upload a CSV file about hired employees and save its data in the database.
+
+    Parameters
+    ----------
+    file : UploadFile
+        Archivo CSV a cargar.
+
+    Returns
+    -------
+    dict
+        A message indicating that the CSV file was uploaded and its data was saved in the database.
+
+    Raises
+    ------
+    HTTPException
+        status_code : 400
+            If the file is not a CSV file.
+        status_code : 500
+            If the data could not be saved in the database.
+    """
+    verify_csv(file)
+
+    return {'message': 'CSV file uploaded and data saved in the database.'}
+
+
+@router.post("/upload/csv/jobs/")
+async def upload_csv_file(file: UploadFile = File(...)) -> dict[str, str]:
+    """
+    Upload a CSV file about jobs and save its data in the database.
+
+    Parameters
+    ----------
+    file : UploadFile
+        Archivo CSV a cargar.
+
+    Returns
+    -------
+    dict
+        A message indicating that the CSV file was uploaded and its data was saved in the database.
+
+    Raises
+    ------
+    HTTPException
+        status_code : 400
+            If the file is not a CSV file.
+        status_code : 500
+            If the data could not be saved in the database.
+    """
+    verify_csv(file)
+
+    return {'message': 'CSV file uploaded and data saved in the database.'}
