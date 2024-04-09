@@ -1,4 +1,11 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
+
+ENV DATABASE_USER=globanTest
+ENV DATABASE_PASS=mypassword
+ENV DATABASE_NAME=employees_jobs
+ENV DATABASE_TYPE=postgresql
+ENV DATABASE_HOST=localhost
+ENV DATABASE_PORT=5432
 
 WORKDIR /app
 
