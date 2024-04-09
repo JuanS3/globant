@@ -2,7 +2,8 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    TIMESTAMP
+    TIMESTAMP,
+    ForeignKey
 )
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -14,9 +15,9 @@ class Employee(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    hire_datetime = Column(TIMESTAMP)
-    department_id = Column(Integer, foreign_key='departments.id')
-    job_id = Column(Integer, foreign_key='jobs.id')
+    hire_datetime = Column(TIMESTAMP, nullable=True, default=None)
+    department_id = Column(Integer, ForeignKey('departments.id'), nullable=True, default=None)
+    job_id = Column(Integer, ForeignKey('jobs.id'), nullable=True, default=None)
 
 
 class Department(Base):
