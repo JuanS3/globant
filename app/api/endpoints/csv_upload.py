@@ -38,6 +38,23 @@ def verify_csv(file: UploadFile) -> None:
         )
 
 
+def validate_data(data: list[str]) -> list[str]:
+    """
+    Validate the data in the CSV file.
+
+    Parameters
+    ----------
+    data : list[str]
+        Data to validate.
+
+    Returns
+    -------
+    list[str]
+        Data validated.
+    """
+    return [d if d.strip() != '' else None for d in data]
+
+
 async def save_csv(content_file: bytes, model: str) -> dict[str, str]:
     """
     Save the data in the CSV file in the database.
@@ -72,16 +89,32 @@ async def save_csv(content_file: bytes, model: str) -> dict[str, str]:
         for line in content_file.decode().split('\n'):
 
             if line:
-                data = line.split(',')
+                data = validate_data(line.split(','))
                 match model:
                     case 'employees':
-                        repository.create_employee(*data)
+                        try:
+                            repository.create_employee(*data)
+                        except Exception as e:
+                            if 'error_employees' in message:
+                                message['error_employees'] = []
+                            message['error_employees'].append(f'Error saving employee: {e}')
 
                     case 'departments':
-                        repository.create_department(*data)
+                        try:
+                            repository.create_department(*data)
+                        except Exception as e:
+                            if 'error_departments' in message:
+                                message['error_departments'] = []
+                            message['error_departments'].append(f'Error saving department: {e}')
 
                     case 'jobs':
-                        repository.create_job(*data)
+                        try:
+                            repository.create_job(*data)
+                        except Exception as e:
+                            if 'error_jobs' in message:
+                                message['error_jobs'] = []
+                            message['error_jobs'].append(f'Error saving job: {e}')
+                n += 1
 
         message['ok'] = 'Data saved in the database.'
 
