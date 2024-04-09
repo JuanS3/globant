@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS jobs (
 -- Crear la tabla de empleados si no existe
 CREATE TABLE IF NOT EXISTS employees (
     id              INTEGER PRIMARY KEY,
-    name            VARCHAR(255) NOT NULL,
-    hire_datetime   TIMESTAMP NOT NULL,
-    department_id   INTEGER REFERENCES departments(id) NOT NULL,
-    job_id          INTEGER REFERENCES jobs(id) NOT NULL
+    name            VARCHAR(255),
+    hire_datetime   TIMESTAMP,
+    department_id   INTEGER REFERENCES departments(id),
+    job_id          INTEGER REFERENCES jobs(id)
 );
