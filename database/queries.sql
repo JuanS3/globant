@@ -55,11 +55,7 @@ with hired_by_dpt as (
         departments d
         inner join employees e on e.department_id = d.id
     where
-        extract(
-            'year'
-            from
-                e.hire_datetime
-        ) = 2021
+        extract('year' from e.hire_datetime) = 2021
     group by
         d.id,
         d.department
